@@ -5,52 +5,63 @@ import java.util.Iterator;
 
 public class No {
     private String nomeNo;
-    private ArrayList<String> associacao;
+    private ArrayList<No> filhas = new ArrayList<>();
 
     public No(String nome) {
         this.nomeNo = nome;
-        this.associacao = new ArrayList<>();
     }
 
-    public No(String nome, ArrayList<String> associacao) {
-        this.nomeNo = nome;
-        this.associacao = associacao;
-    }
-
-    public boolean associacarNos(String outroNo) {
-        for (String str : associacao) {
-            if (! str.equalsIgnoreCase(outroNo)) {
-                this.associacao.add(outroNo);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean verificarAssociacao(String no) {
-        for (String str : associacao) {
-            if (! str.equalsIgnoreCase(no)) return true;
-        }
-        return false;
-    }
-
-    public void removerAssociacao(String outroNo) {
-        associacao.removeIf(str -> str.equalsIgnoreCase(outroNo));
-    }
-
-    public boolean NoExiste(String nome) {
-        return this.nomeNo.equalsIgnoreCase(nome);
+    public void setNomeNo(String no) {
+        this.nomeNo = no;
     }
 
     public String getNomeNo() {
         return nomeNo;
     }
 
-    public void setNomeNo(String nomeNo) {
-        this.nomeNo = nomeNo;
+    public boolean adicionarFilha(No filha) {
+        if(filha == null) {
+            return false;
+        } else {
+            this.filhas.add(filha);
+            return true;
+        }
     }
 
-    public ArrayList<String> getAssociacao() {
-        return associacao;
+    public boolean removeFilha(String noID) {
+        Iterator<No> filha = filhas.iterator();
+        while (filha.hasNext()) {
+            No no = filha.next();
+            if(no.getNomeNo().equals(noID)) {
+                filha.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean atualizaFilha(String noID, String novoID) {
+        Iterator<No> filha = filhas.iterator();
+        while (filha.hasNext()) {
+            No no = filha.next();
+            if(no.getNomeNo().equals(noID)) {
+                no.setNomeNo(novoID);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeFilha(String noID) {
+        for (No n : filhas) {
+            if (n.getNomeNo().equals(noID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<No> getFilhas() {
+        return filhas;
     }
 }
