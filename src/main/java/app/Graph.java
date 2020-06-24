@@ -54,6 +54,19 @@ public class Graph implements Serializable {
         return false;
     }
 
+    public boolean removeSubgraph(String label) {
+        Iterator<Graph> graphIterator = subgraphs.iterator();
+        while (graphIterator.hasNext()) {
+            Graph aux = graphIterator.next();
+            if(aux.getLabel().equals(label)) {
+                aux.removeNo(label);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public boolean atualizaNo(String noID, String novoID) {
         Iterator<No> filhas = nos.iterator();
         while (filhas.hasNext()) {
