@@ -66,7 +66,6 @@ public class Graph implements Serializable {
         return false;
     }
 
-
     public boolean atualizaNo(String noID, String novoID) {
         Iterator<No> filhas = nos.iterator();
         while (filhas.hasNext()) {
@@ -131,6 +130,24 @@ public class Graph implements Serializable {
                     graph.associacar(paiNoID, filhaNoID);
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public boolean associarSubgraph(String paiNoID, String filhaNoID, String label) {
+        No pai = getNo(paiNoID);
+        if (pai == null || pai.existeFilha(filhaNoID)) {
+            return false;
+        }
+        for (Graph graph : subgraphs) {
+            if(graph.getLabel().equals(label)) {
+                No filha = graph.getNo(filhaNoID);
+                if (filha == null) {
+                    return false;
+                }
+                pai.adicionarFilha(filha);
+                return true;
             }
         }
         return false;
