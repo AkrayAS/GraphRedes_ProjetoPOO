@@ -23,8 +23,7 @@ public class Graph implements Serializable {
     public boolean adicionarNo(String noID, String subgraph) {
         if(existeSubgraph(subgraph)) {
             for (Graph graph : subgraphs) {
-                if(graph.getLabel().equals(subgraph)) graph.adicionarNo(noID);
-                return true;
+                if(graph.getLabel().equals(subgraph)) return graph.adicionarNo(noID);
             }
         }
         return false;
