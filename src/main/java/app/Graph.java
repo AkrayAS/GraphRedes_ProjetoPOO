@@ -6,12 +6,65 @@ import java.util.Iterator;
 
 public class Graph implements Serializable {
     private String label;
+    private String labelloc;
     private ArrayList<No> nos = new ArrayList<>();
     private ArrayList<Graph> subgraphs = new ArrayList<>();
+    private String nodeShape;
+    private String nodeColor;
+    private String edgeColor;
 
     public Graph(String label) {
         this.label = label;
     }
+
+    public Graph(String label, String labelloc) {
+        this.label = label;
+        this.labelloc = labelloc;
+    }
+
+    public Graph(String label, String labelloc, String nodeShape) {
+        this.label = label;
+        this.labelloc = labelloc;
+        this.nodeShape = nodeShape;
+    }
+
+    public Graph(String label, String labelloc, String nodeShape, String nodeColor) {
+        this.label = label;
+        this.labelloc = labelloc;
+        this.nodeShape = nodeShape;
+        this.nodeColor = nodeColor;
+    }
+
+    public Graph(String label, String labelloc, String nShape, String nColor, String eColor) {
+        this.label = label;
+        this.labelloc = labelloc;
+        this.nodeShape = nShape;
+        this.nodeColor = nColor;
+        this.edgeColor = eColor;
+    }
+
+    public void adicionarPropriedadesGerais(String labelloc) {
+        this.labelloc = labelloc;
+    }
+
+    public void adicionarPropriedadesGerais(String labelloc, String nShape) {
+        this.labelloc = labelloc;
+        this.nodeShape = nShape;
+    }
+
+    public void adicionarPropriedadesGerais(String labelloc, String nShape, String nColor){
+        this.labelloc = labelloc;
+        this.nodeShape = nShape;
+        this.nodeColor = nColor;
+    }
+
+    public void adicionarPropriedadesGerais(String labelloc, String nShape, String nColor, String eColor) {
+        this.labelloc = labelloc;
+        this.nodeShape = nShape;
+        this.nodeColor = nColor;
+        this.edgeColor = eColor;
+    }
+
 
     public boolean adicionarNo(String noID) {
         if(existe(noID)) return false;
@@ -155,6 +208,28 @@ public class Graph implements Serializable {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("graph {" + "\n" );
+        if(this.label != null) {
+            stringBuilder.append("  ").append("label = ").append("\"").append(this.label).append("\"").append("\n");
+            if(this.labelloc != null) stringBuilder.append("  ").append("labelloc = ").append("\"").append(this.labelloc).append("\"").append("\n");
+            stringBuilder.append("\n");
+        }
+        if(this.nodeShape != null || this.nodeColor != null) {
+            stringBuilder.append("  ").append("node [");
+            if(this.nodeShape != null){
+                stringBuilder.append("shape=").append(this.nodeShape);
+                if(this.nodeColor != null) stringBuilder.append(" ");
+            }
+            if(this.nodeColor != null) stringBuilder.append("color=").append(this.nodeColor);
+            stringBuilder.append("]").append("\n");
+        }
+        if(this.edgeColor != null) {
+            stringBuilder.append("  ").append("edge [");
+            if(this.edgeColor != null) {
+                stringBuilder.append("color=").append(this.edgeColor);
+            }
+            stringBuilder.append("]").append("\n");
+        }
+        stringBuilder.append("\n");
         for (No no : this.nos) {
             ArrayList<No> aux = no.getFilhas();
             for (No filha : aux) {

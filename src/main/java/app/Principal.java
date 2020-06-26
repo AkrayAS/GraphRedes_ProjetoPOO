@@ -6,6 +6,8 @@ public class Principal {
         graph.adicionarNo("a");
         graph.adicionarNo("b");
 
+        graph.adicionarPropriedadesGerais("t","box","gray","blue");
+
         graph.associacar("a","b");
         graph.criaSubgraph("cluster_oi");
         graph.adicionarNo("c", "cluster_oi");
