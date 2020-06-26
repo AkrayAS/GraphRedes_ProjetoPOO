@@ -163,6 +163,7 @@ public class Graph implements Serializable {
         }
         if(subgraphs.size() > 0) {
             for (Graph graph : this.subgraphs) {
+                stringBuilder.append("\n");
                 stringBuilder.append("  subgraph ").append(graph.getLabel()).append("{").append("\n");
                 for (No no : graph.nos) {
                     ArrayList<No> aux = no.getFilhas();
