@@ -15,8 +15,8 @@ public class Principal {
 
         Arquivo arquivo = new Arquivo();
 
-        //arquivo.SalvarGrafoDot("test.dot", graph);
+        arquivo.SalvarGrafoDot("test.dot", graph);
 
-        System.out.println(graph.toString());
+        System.out.println(arquivo.lerGrafoDot("test.dot"));
     }
 }
