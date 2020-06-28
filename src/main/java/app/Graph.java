@@ -5,11 +5,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Graph implements Serializable {
+    //Atributos Gerais de Graph/Subgraph
     private String label;
     private String labelloc;
+    private int labelFsize;
+    private String style;
+    private String color;
+    //Nos e Subgraphs que compoem um graph
     private ArrayList<No> nos = new ArrayList<>();
     private ArrayList<Graph> subgraphs = new ArrayList<>();
+    //Atributos Gerais de todos os nós e arcos.
     private String nodeShape;
+    private String labellocNode;
+    private int labelFsizeNode;
     private String nodeColor;
     private String edgeColor;
 
@@ -22,49 +30,135 @@ public class Graph implements Serializable {
         this.labelloc = labelloc;
     }
 
-    public Graph(String label, String labelloc, String nodeShape) {
-        this.label = label;
-        this.labelloc = labelloc;
-        this.nodeShape = nodeShape;
+    public void setLabelloc(int c) {
+        Locations labelloc = Locations.escolherLocalizacao(c);
+
+        switch (labelloc) {
+            case TOP:
+                this.labelloc = "t";
+            case BOTTOM:
+                this.labelloc = "b";
+            case CENTER:
+                this.labelloc = "c";
+        }
     }
 
-    public Graph(String label, String labelloc, String nodeShape, String nodeColor) {
-        this.label = label;
-        this.labelloc = labelloc;
-        this.nodeShape = nodeShape;
-        this.nodeColor = nodeColor;
+    public void setLabelFsize(int labelFsize) {
+        if(labelFsize < 14){
+            this.labelFsize = labelFsize;
+        } else this.labelFsize = 10;
     }
 
-    public Graph(String label, String labelloc, String nShape, String nColor, String eColor) {
-        this.label = label;
-        this.labelloc = labelloc;
-        this.nodeShape = nShape;
-        this.nodeColor = nColor;
-        this.edgeColor = eColor;
+    public void setStyle(int c) {
+        Styles s = Styles.escolherEstilo(c);
+        switch (s) {
+            case BOLD:
+                this.style = "bold";
+            case SOLID:
+                this.style = "solid";
+            case DOTTED:
+                this.style = "dotted";
+            case FILLED:
+                this.style = "filled";
+            default:
+                this.style = null;
+        }
     }
 
-    public void adicionarPropriedadesGerais(String labelloc) {
-        this.labelloc = labelloc;
+    public void setColor(int c) {
+        Colors cor = Colors.escolherCor(c);
+        switch (cor) {
+            case RED:
+                this.color = "red";
+            case BLUE:
+                this.color = "blue";
+            case BLACK:
+                this.color = "black";
+            case GREEN:
+                this.color = "green";
+            case WHITE:
+                this.color = "white";
+            case YELLOW:
+                this.color = "yellow";
+            default:
+                this.color = null;
+        }
     }
 
-    public void adicionarPropriedadesGerais(String labelloc, String nShape) {
-        this.labelloc = labelloc;
-        this.nodeShape = nShape;
+    public void setNodeShape(int c) {
+        Shapes s = Shapes.escolherForma(c);
+        switch (s) {
+            case BOX:
+                this.nodeShape = "box";
+            case NONE:
+                this.nodeShape = "none";
+            case OVAL:
+                this.nodeShape = "oval";
+            case TRIANGLE:
+                this.nodeShape = "triangle";
+            default:
+                this.nodeShape = null;
+        }
     }
 
-    public void adicionarPropriedadesGerais(String labelloc, String nShape, String nColor){
-        this.labelloc = labelloc;
-        this.nodeShape = nShape;
-        this.nodeColor = nColor;
+    public void setLabellocNode(int c) {
+        Locations labelloc = Locations.escolherLocalizacao(c);
+
+        switch (labelloc) {
+            case TOP:
+                this.labellocNode = "t";
+            case BOTTOM:
+                this.labellocNode = "b";
+            case CENTER:
+                this.labellocNode = "c";
+        }
     }
 
-    public void adicionarPropriedadesGerais(String labelloc, String nShape, String nColor, String eColor) {
-        this.labelloc = labelloc;
-        this.nodeShape = nShape;
-        this.nodeColor = nColor;
-        this.edgeColor = eColor;
+    public void setLabelFsizeNode(int labelFsizeNode) {
+        if(labelFsizeNode < 14) {
+            this.labelFsizeNode = labelFsizeNode;
+        } else this.labelFsizeNode = 10;
     }
 
+    public void setNodeColor(int c) {
+        Colors cor = Colors.escolherCor(c);
+        switch (cor) {
+            case RED:
+                this.nodeColor = "red";
+            case BLUE:
+                this.nodeColor = "blue";
+            case BLACK:
+                this.nodeColor = "black";
+            case GREEN:
+                this.nodeColor = "green";
+            case WHITE:
+                this.nodeColor = "white";
+            case YELLOW:
+                this.nodeColor = "yellow";
+            default:
+                this.nodeColor = null;
+        }
+    }
+
+    public void setEdgeColor(int c) {
+        Colors cor = Colors.escolherCor(c);
+        switch (cor) {
+            case RED:
+                this.edgeColor = "red";
+            case BLUE:
+                this.edgeColor = "blue";
+            case BLACK:
+                this.edgeColor = "black";
+            case GREEN:
+                this.edgeColor = "green";
+            case WHITE:
+                this.edgeColor = "white";
+            case YELLOW:
+                this.edgeColor = "yellow";
+            default:
+                this.edgeColor = null;
+        }
+    }
 
     public boolean adicionarNo(String noID) {
         if(existe(noID)) return false;
@@ -130,6 +224,19 @@ public class Graph implements Serializable {
             if (aux.getNomeNo().equals(noID)) {
                 aux.setNomeNo(novoID);
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean propriedadesNo(String noID, int fsize, int c) {
+        if(this.existe(noID)) {
+            for (No n : this.nos) {
+                if(n.getNomeNo().equals(noID)) {
+                    n.setLabelFsizenode(fsize);
+                    n.setLabellocNode(c);
+                    return true;
+                }
             }
         }
         return false;
@@ -210,16 +317,27 @@ public class Graph implements Serializable {
         StringBuilder stringBuilder = new StringBuilder("graph {" + "\n" );
         if(this.label != null) {
             stringBuilder.append("  ").append("label = ").append("\"").append(this.label).append("\"").append("\n");
-            if(this.labelloc != null) stringBuilder.append("  ").append("labelloc = ").append("\"").append(this.labelloc).append("\"").append("\n");
+            if(this.labelloc != null) stringBuilder.append("  ").append("labelloc = ").append(this.labelloc).append("\n");
+            if(this.labelFsize != 0) stringBuilder.append("  ").append("fontsize = ").append(this.labelFsize).append("\n");
+            if(this.style != null) stringBuilder.append("  ").append("style = ").append(this.style).append(";").append("\n");
+            if(this.color != null) stringBuilder.append("  ").append("bgcolor = ").append(this.color).append(";").append("\n");
             stringBuilder.append("\n");
         }
-        if(this.nodeShape != null || this.nodeColor != null) {
+        if(this.nodeShape != null || this.nodeColor != null || this.labelFsizeNode != 0 || this.labellocNode != null ) {
             stringBuilder.append("  ").append("node [");
             if(this.nodeShape != null){
                 stringBuilder.append("shape=").append(this.nodeShape);
-                if(this.nodeColor != null) stringBuilder.append(" ");
+                if(this.nodeColor != null || this.labelFsizeNode != 0 || this.labellocNode != null) stringBuilder.append(" ");
             }
-            if(this.nodeColor != null) stringBuilder.append("color=").append(this.nodeColor);
+            if(this.nodeColor != null) {
+                stringBuilder.append("color=").append(this.nodeColor);
+                if(this.labelFsizeNode != 0 || this.labellocNode != null) stringBuilder.append(" ");
+            }
+            if(this.labelFsizeNode != 0) {
+                stringBuilder.append("fontsize = ").append(this.labelFsizeNode);
+                if(this.labellocNode != null) stringBuilder.append(" ");
+            }
+            if(this.labellocNode != null) stringBuilder.append("labelloc = ").append(this.labellocNode);
             stringBuilder.append("]").append("\n");
         }
         if(this.edgeColor != null) {
@@ -231,20 +349,49 @@ public class Graph implements Serializable {
         }
         stringBuilder.append("\n");
         for (No no : this.nos) {
-            ArrayList<No> aux = no.getFilhas();
-            for (No filha : aux) {
-                stringBuilder.append("  ").append(no.getNomeNo()).append(" -- ").append(filha.getNomeNo()).append("\n");
+            stringBuilder.append("  ").append(no.getNomeNo()).append("  [").append("label = ").append(no.getLabel());
+            if(no.getLabelFsizenode() > 0)stringBuilder.append(" fontsize = ").append(no.getLabelFsizenode());
+            if(no.getLabellocNode() != null)stringBuilder.append("labelloc = ").append(no.getLabellocNode());
+            stringBuilder.append("]").append("\n");
+        }
+        if (subgraphs.size() > 0) {
+            for (Graph graph : this.subgraphs) {
+                for (No no : graph.nos) {
+                    stringBuilder.append("  ").append(no.getNomeNo()).append("  [").append("label = ").append(no.getLabel());
+                    if(no.getLabelFsizenode() > 0)stringBuilder.append(" fontsize = ").append(no.getLabelFsizenode());
+                    if(no.getLabellocNode() != null)stringBuilder.append("labelloc = ").append(no.getLabellocNode());
+                    stringBuilder.append("]").append("\n");
+                }
             }
+        }
+        stringBuilder.append("\n");
+        for (No no : this.nos) {
+            if(no.existemFilhas()) {
+                ArrayList<No> aux = no.getFilhas();
+                for (No filha : aux) {
+                    stringBuilder.append("  ").append(no.getNomeNo()).append(" -- ").append(filha.getNomeNo()).append("\n");
+                }
+            } else stringBuilder.append("  ").append(no.getNomeNo()).append("\n");
         }
         if(subgraphs.size() > 0) {
             for (Graph graph : this.subgraphs) {
                 stringBuilder.append("\n");
-                stringBuilder.append("  subgraph ").append(graph.getLabel()).append("{").append("\n");
+                stringBuilder.append("  subgraph cluster_").append(graph.getLabel()).append("{").append("\n");
+                if(graph.label != null) {
+                    stringBuilder.append("    ").append("label = ").append("\"").append(graph.label).append("\"").append("\n");
+                    if(graph.labelloc != null) stringBuilder.append("    ").append("labelloc = ").append(graph.labelloc).append("\n");
+                    if(graph.labelFsize != 0) stringBuilder.append("    ").append("fontsize = ").append(graph.labelFsize).append("\n");
+                    if(graph.style != null) stringBuilder.append("    ").append("style = ").append(graph.style).append(";").append("\n");
+                    if(graph.color != null) stringBuilder.append("    ").append("bgcolor = ").append(graph.color).append(";").append("\n");
+                    stringBuilder.append("\n");
+                }
                 for (No no : graph.nos) {
-                    ArrayList<No> aux = no.getFilhas();
-                    for (No filha : aux) {
-                        stringBuilder.append("    ").append(no.getNomeNo()).append(" -- ").append(filha.getNomeNo()).append("\n");
-                    }
+                    if(no.existemFilhas()) {
+                        ArrayList<No> aux = no.getFilhas();
+                        for (No filha : aux) {
+                            stringBuilder.append("    ").append(no.getNomeNo()).append(" -- ").append(filha.getNomeNo()).append("\n");
+                        }
+                    } else stringBuilder.append("    ").append(no.getNomeNo()).append("\n");
                 }
                 stringBuilder.append("  }").append("\n");
             }

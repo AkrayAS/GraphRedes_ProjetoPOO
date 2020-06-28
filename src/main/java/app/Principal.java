@@ -6,13 +6,9 @@ public class Principal {
         graph.adicionarNo("a");
         graph.adicionarNo("b");
 
-        graph.adicionarPropriedadesGerais("t","box","gray","blue");
-
         graph.associacar("a","b");
         graph.criaSubgraph("cluster_oi");
         graph.adicionarNo("c", "cluster_oi");
-        graph.adicionarNo("d", "cluster_oi");
-        graph.associacar("c","d","cluster_oi");
         graph.associarSubgraph("b","c","cluster_oi");
 
         Arquivo arquivo = new Arquivo();
