@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+
 public class Endpoint extends No{
     private String imagem;
 
@@ -9,15 +11,11 @@ public class Endpoint extends No{
 
     @Override
     public boolean adicionarFilha(No filha) {
-        if (super.existemFilhas()) return false;
-        else return super.adicionarFilha(filha);
+        return false;
     }
 
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
+    @Override
+    public boolean verificarAssociacoes() {
+        return this.associacoes == 1;
     }
 }

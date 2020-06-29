@@ -6,14 +6,13 @@ import java.util.Iterator;
 public class No {
     private String nomeNo;
     private String label;
-    private ArrayList<No> filhas = new ArrayList<>();
+    protected ArrayList<No> filhas = new ArrayList<>();
+    protected int associacoes;
     //Atributos especificos de cada no
     private int labelFsizenode;
     private String labellocNode;
 
-    public No(String nome) {
-        this.nomeNo = nome;
-    }
+    public No(String nome) { this.nomeNo = nome; }
 
     public void setNomeNo(String no) {
         this.nomeNo = no;
@@ -62,9 +61,19 @@ public class No {
         if(filha == null) {
             return false;
         } else {
+            filha.associar();
+            this.associar();
             this.filhas.add(filha);
             return true;
         }
+    }
+
+    public void associar() {
+        this.associacoes++;
+    }
+
+    public void desassociar() {
+        this.associacoes--;
     }
 
     public boolean removeFilha(String noID) {
@@ -72,6 +81,7 @@ public class No {
         while (filha.hasNext()) {
             No no = filha.next();
             if(no.getNomeNo().equals(noID)) {
+                this.desassociar();
                 filha.remove();
                 return true;
             }
@@ -102,6 +112,10 @@ public class No {
             }
         }
         return false;
+    }
+
+    public boolean verificarAssociacoes() {
+        return this.associacoes > 0;
     }
 
     public ArrayList<No> getFilhas() {

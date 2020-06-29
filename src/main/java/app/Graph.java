@@ -193,6 +193,7 @@ public class Graph implements Serializable {
         while (iterator.hasNext()) {
             No aux = iterator.next();
             if (aux.getNomeNo().equals(noID)) {
+                aux.desassociar();
                 iterator.remove();
                 return true;
             }
@@ -278,16 +279,14 @@ public class Graph implements Serializable {
         if (filha == null) {
             return false;
         }
-        pai.adicionarFilha(filha);
-        return true;
+        return pai.adicionarFilha(filha);
     }
 
     public boolean associacar(String paiNoID, String filhaNoID, String label) {
         if (existeSubgraph(label)) {
             for (Graph graph : subgraphs) {
                 if(graph.getLabel().equals(label)) {
-                    graph.associacar(paiNoID, filhaNoID);
-                    return true;
+                    return graph.associacar(paiNoID, filhaNoID);
                 }
             }
         }

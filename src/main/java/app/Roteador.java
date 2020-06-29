@@ -6,4 +6,9 @@ public class Roteador extends No{
     public Roteador(String nome) {
         super(nome);
     }
+
+    @Override
+    public boolean verificarAssociacoes() {
+        return this.associacoes >= 2;
+    }
 }

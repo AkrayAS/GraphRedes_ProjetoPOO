@@ -6,4 +6,9 @@ public class Internet extends No{
     public Internet(String nome) {
         super(nome);
     }
+
+    @Override
+    public boolean verificarAssociacoes() {
+        return this.associacoes >= 1;
+    }
 }

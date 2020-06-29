@@ -7,5 +7,8 @@ public class Firewall extends No {
         super(nome);
     }
 
-
+    @Override
+    public boolean verificarAssociacoes() {
+        return this.associacoes >= 2;
+    }
 }
