@@ -21,6 +21,8 @@ public class Graph implements Serializable {
     private String nodeColor;
     private String edgeColor;
 
+    public Graph() { }
+
     public Graph(String label) {
         this.label = label;
     }
@@ -28,6 +30,10 @@ public class Graph implements Serializable {
     public Graph(String label, String labelloc) {
         this.label = label;
         this.labelloc = labelloc;
+    }
+
+    public void setLabel(String label){
+        this.label = label;
     }
 
     public void setLabelloc(int c) {
@@ -44,7 +50,7 @@ public class Graph implements Serializable {
     }
 
     public void setLabelFsize(int labelFsize) {
-        if(labelFsize < 14){
+        if(labelFsize <= 14){
             this.labelFsize = labelFsize;
         } else this.labelFsize = 10;
     }
@@ -115,7 +121,7 @@ public class Graph implements Serializable {
     }
 
     public void setLabelFsizeNode(int labelFsizeNode) {
-        if(labelFsizeNode < 14) {
+        if(labelFsizeNode <= 14) {
             this.labelFsizeNode = labelFsizeNode;
         } else this.labelFsizeNode = 10;
     }
