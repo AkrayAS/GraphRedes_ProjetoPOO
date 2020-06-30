@@ -176,6 +176,42 @@ public class App {
 
     public boolean salvarArquivo(String nomeDoArquivo) {
         try {
+            for (No no: graph.getNos()) {
+                if(no instanceof Endpoint) {
+                    if (! no.verificarAssociacoes()) return false;
+                }
+                if(no instanceof Firewall){
+                    if(! no.verificarAssociacoes()) return false;
+                }
+                if(no instanceof Internet) {
+                    if(! no.verificarAssociacoes()) return false;
+                }
+                if(no instanceof Roteador) {
+                    if(! no.verificarAssociacoes()) return false;
+                }
+                if(no instanceof Switch) {
+                    if(! no.verificarAssociacoes()) return false;
+                }
+            }
+            for (Graph subgraph : graph.getSubgraphs()) {
+                for (No no : subgraph.getNos()) {
+                    if(no instanceof Endpoint) {
+                        if (! no.verificarAssociacoes()) return false;
+                    }
+                    if(no instanceof Firewall){
+                        if(! no.verificarAssociacoes()) return false;
+                    }
+                    if(no instanceof Internet) {
+                        if(! no.verificarAssociacoes()) return false;
+                    }
+                    if(no instanceof Roteador) {
+                        if(! no.verificarAssociacoes()) return false;
+                    }
+                    if(no instanceof Switch) {
+                        if(! no.verificarAssociacoes()) return false;
+                    }
+                }
+            }
             return arquivo.SalvarGrafoDot(nomeDoArquivo, graph);
         }catch (Exception e) {
             return false;

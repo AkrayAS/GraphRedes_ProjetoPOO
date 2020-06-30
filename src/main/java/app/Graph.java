@@ -354,18 +354,44 @@ public class Graph implements Serializable {
         }
         stringBuilder.append("\n");
         for (No no : this.nos) {
-            stringBuilder.append("  ").append(no.getNomeNo()).append("  [").append("label = ").append(no.getLabel());
-            if(no.getLabelFsizenode() > 0)stringBuilder.append(" fontsize = ").append(no.getLabelFsizenode());
-            if(no.getLabellocNode() != null)stringBuilder.append("labelloc = ").append(no.getLabellocNode());
-            stringBuilder.append("]").append("\n");
+            if(no.getLabel() != null || no.getLabellocNode() != null || no.getLabelFsizenode() != 0 || no.getImagens() != null) {
+                stringBuilder.append("  ").append(no.getNomeNo()).append("  [");
+                if (no.getLabel() != null) {
+                    stringBuilder.append("label = ").append("\"").append(no.getLabel()).append("\"");
+                    if(no.getLabellocNode() != null || no.getLabelFsizenode() != 0 || no.getImagens() != null) stringBuilder.append(" ");
+                }
+                if(no.getImagens() != null) {
+                    stringBuilder.append("image = ").append("\"").append(no.getImagens()).append("\"");
+                    if(no.getLabellocNode() != null || no.getLabelFsizenode() != 0) stringBuilder.append(" ");
+                }
+                if (no.getLabelFsizenode() > 0) {
+                    stringBuilder.append("fontsize = ").append(no.getLabelFsizenode());
+                    if(no.getLabellocNode() != null)stringBuilder.append(" ");
+                }
+                if (no.getLabellocNode() != null) {
+                    stringBuilder.append("labelloc = ").append("\"").append(no.getLabellocNode()).append("\"");
+                }
+                stringBuilder.append("]").append("\n");
+            }
         }
         if (subgraphs.size() > 0) {
             for (Graph graph : this.subgraphs) {
                 for (No no : graph.nos) {
-                    stringBuilder.append("  ").append(no.getNomeNo()).append("  [").append("label = ").append(no.getLabel());
-                    if(no.getLabelFsizenode() > 0)stringBuilder.append(" fontsize = ").append(no.getLabelFsizenode());
-                    if(no.getLabellocNode() != null)stringBuilder.append("labelloc = ").append(no.getLabellocNode());
-                    stringBuilder.append("]").append("\n");
+                    if (no.getLabel() != null || no.getLabellocNode() != null || no.getLabelFsizenode() != 0 ) {
+                        stringBuilder.append("  ").append(no.getNomeNo()).append("  [");
+                        if (no.getLabel() != null) {
+                            stringBuilder.append("label = ").append("\"").append(no.getLabel()).append("\"");
+                            if(no.getLabellocNode() != null || no.getLabelFsizenode() != 0) stringBuilder.append(" ");
+                        }
+                        if (no.getLabelFsizenode() > 0) {
+                            stringBuilder.append("fontsize = ").append(no.getLabelFsizenode());
+                            if(no.getLabellocNode() != null)stringBuilder.append(" ");
+                        }
+                        if (no.getLabellocNode() != null) {
+                            stringBuilder.append("labelloc = ").append("\"").append(no.getLabellocNode()).append("\"");
+                        }
+                        stringBuilder.append("]").append("\n");
+                    }
                 }
             }
         }
@@ -407,5 +433,13 @@ public class Graph implements Serializable {
 
     public String getLabel() {
         return label;
+    }
+
+    public ArrayList<No> getNos() {
+        return nos;
+    }
+
+    public ArrayList<Graph> getSubgraphs() {
+        return subgraphs;
     }
 }

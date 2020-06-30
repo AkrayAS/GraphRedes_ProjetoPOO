@@ -1,6 +1,10 @@
 package app;
 
 public class Principal {
+    public static void menu() {
+
+    }
+    
     public static void main(String[] args) {
         Graph graph = new Graph("teste");
         graph.adicionarNo("a");
