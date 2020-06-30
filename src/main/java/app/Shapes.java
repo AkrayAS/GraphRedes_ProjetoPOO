@@ -1,15 +1,15 @@
 package app;
 
 public enum Shapes {
-    NONE(0), BOX(1), OVAL(3), TRIANGLE(4);
+    NONE("none"), BOX("box"), OVAL("oval"), TRIANGLE("triangle");
 
-    private final int codigo;
+    private final String codigo;
 
-    Shapes(int c){
+    Shapes(String c){
         this.codigo = c;
     }
 
-    public static Shapes escolherForma(int c){
+    public static Shapes escolherForma(String c){
         for (Shapes shape : Shapes.values()) {
             if (c == shape.codigo) {
                 return shape;

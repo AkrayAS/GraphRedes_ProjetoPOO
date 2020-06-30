@@ -1,15 +1,15 @@
 package app;
 
 public enum Locations {
-    CENTER(0),BOTTOM(1),TOP(2);
+    CENTER("c"),BOTTOM("b"),TOP("t");
 
-    private final int codigo;
+    private final String codigo;
 
-    Locations(int c) {
+    Locations(String c) {
         this.codigo = c;
     }
 
-    public static Locations escolherLocalizacao(int c){
+    public static Locations escolherLocalizacao(String c){
         for (Locations locations : Locations.values()) {
             if (c == locations.codigo) {
                 return locations;

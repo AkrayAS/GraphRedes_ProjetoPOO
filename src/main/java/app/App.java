@@ -13,7 +13,7 @@ public class App {
         }
     }
 
-    public boolean escolherPosLabel(int c) {
+    public boolean escolherPosLabel(String c) {
         try {
             graph.setLabelloc(c);
             return true;
@@ -31,7 +31,7 @@ public class App {
         }
     }
 
-    public boolean escolherEstilo(int c) {
+    public boolean escolherEstilo(String c) {
         try {
             graph.setStyle(c);
             return true;
@@ -40,7 +40,7 @@ public class App {
         }
     }
 
-    public boolean escolherCor(int c) {
+    public boolean escolherCor(String c) {
         try {
             graph.setColor(c);
             return true;
@@ -49,7 +49,7 @@ public class App {
         }
     }
 
-    public boolean escolherFormatoNode(int c) {
+    public boolean escolherFormatoNode(String c) {
         try {
             graph.setNodeShape(c);
             return true;
@@ -58,7 +58,7 @@ public class App {
         }
     }
 
-    public boolean escolherPosLabelNode(int c) {
+    public boolean escolherPosLabelNode(String c) {
         try {
             graph.setLabellocNode(c);
             return true;
@@ -76,7 +76,7 @@ public class App {
         }
     }
 
-    public boolean escolherCorNode(int c){
+    public boolean escolherCorNode(String c){
         try {
             graph.setNodeColor(c);
             return true;
@@ -85,7 +85,7 @@ public class App {
         }
     }
 
-    public boolean escolherCorArco(int c){
+    public boolean escolherCorArco(String c){
         try {
             graph.setEdgeColor(c);
             return true;
@@ -102,9 +102,25 @@ public class App {
         }
     }
 
+    public boolean adicionarNodeDatagrama(String noID, int c) {
+        try {
+            return graph.adicionarNo(noID, c);
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public boolean adicionarNodeSubGraph(String noID, String nameSubGraph){
         try {
             return graph.adicionarNo(noID, nameSubGraph);
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean adicionarNodeSubGraphDatagrama(String noID, int c, String nameSubGraph){
+        try {
+            return graph.adicionarNo(noID, c ,nameSubGraph);
         } catch (Exception e){
             return false;
         }
@@ -142,9 +158,9 @@ public class App {
         }
     }
 
-    public boolean adicionarPropriedadesNode(String noID, int fsize, int c){
+    public boolean adicionarPropriedadesNode(String noID, String label ,int fsize, int c){
         try {
-            return graph.propriedadesNo(noID, fsize, c);
+            return graph.propriedadesNo(noID, label ,fsize, c);
         } catch (Exception e){
             return false;
         }

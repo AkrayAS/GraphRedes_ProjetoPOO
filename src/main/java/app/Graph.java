@@ -36,17 +36,9 @@ public class Graph implements Serializable {
         this.label = label;
     }
 
-    public void setLabelloc(int c) {
+    public void setLabelloc(String c) {
         Locations labelloc = Locations.escolherLocalizacao(c);
-
-        switch (labelloc) {
-            case TOP:
-                this.labelloc = "t";
-            case BOTTOM:
-                this.labelloc = "b";
-            case CENTER:
-                this.labelloc = "c";
-        }
+        this.labelloc = labelloc.toString();
     }
 
     public void setLabelFsize(int labelFsize) {
@@ -55,69 +47,24 @@ public class Graph implements Serializable {
         } else this.labelFsize = 10;
     }
 
-    public void setStyle(int c) {
+    public void setStyle(String c) {
         Styles s = Styles.escolherEstilo(c);
-        switch (s) {
-            case BOLD:
-                this.style = "bold";
-            case SOLID:
-                this.style = "solid";
-            case DOTTED:
-                this.style = "dotted";
-            case FILLED:
-                this.style = "filled";
-            default:
-                this.style = null;
-        }
+        this.style = s.toString();
     }
 
-    public void setColor(int c) {
+    public void setColor(String c) {
         Colors cor = Colors.escolherCor(c);
-        switch (cor) {
-            case RED:
-                this.color = "red";
-            case BLUE:
-                this.color = "blue";
-            case BLACK:
-                this.color = "black";
-            case GREEN:
-                this.color = "green";
-            case WHITE:
-                this.color = "white";
-            case YELLOW:
-                this.color = "yellow";
-            default:
-                this.color = null;
-        }
+        this.color = cor.toString();
     }
 
-    public void setNodeShape(int c) {
+    public void setNodeShape(String c) {
         Shapes s = Shapes.escolherForma(c);
-        switch (s) {
-            case BOX:
-                this.nodeShape = "box";
-            case NONE:
-                this.nodeShape = "none";
-            case OVAL:
-                this.nodeShape = "oval";
-            case TRIANGLE:
-                this.nodeShape = "triangle";
-            default:
-                this.nodeShape = null;
-        }
+        this.nodeShape = s.toString();
     }
 
-    public void setLabellocNode(int c) {
+    public void setLabellocNode(String c) {
         Locations labelloc = Locations.escolherLocalizacao(c);
-
-        switch (labelloc) {
-            case TOP:
-                this.labellocNode = "t";
-            case BOTTOM:
-                this.labellocNode = "b";
-            case CENTER:
-                this.labellocNode = "c";
-        }
+        this.labellocNode = labelloc.toString();
     }
 
     public void setLabelFsizeNode(int labelFsizeNode) {
@@ -126,44 +73,15 @@ public class Graph implements Serializable {
         } else this.labelFsizeNode = 10;
     }
 
-    public void setNodeColor(int c) {
+    public void setNodeColor(String c) {
         Colors cor = Colors.escolherCor(c);
-        switch (cor) {
-            case RED:
-                this.nodeColor = "red";
-            case BLUE:
-                this.nodeColor = "blue";
-            case BLACK:
-                this.nodeColor = "black";
-            case GREEN:
-                this.nodeColor = "green";
-            case WHITE:
-                this.nodeColor = "white";
-            case YELLOW:
-                this.nodeColor = "yellow";
-            default:
-                this.nodeColor = null;
-        }
+        this.nodeColor = cor.toString();
     }
 
-    public void setEdgeColor(int c) {
+    public void setEdgeColor(String c) {
         Colors cor = Colors.escolherCor(c);
-        switch (cor) {
-            case RED:
-                this.edgeColor = "red";
-            case BLUE:
-                this.edgeColor = "blue";
-            case BLACK:
-                this.edgeColor = "black";
-            case GREEN:
-                this.edgeColor = "green";
-            case WHITE:
-                this.edgeColor = "white";
-            case YELLOW:
-                this.edgeColor = "yellow";
-            default:
-                this.edgeColor = null;
-        }
+        this.edgeColor = cor.toString();
+
     }
 
     public boolean adicionarNo(String noID) {
@@ -173,10 +91,69 @@ public class Graph implements Serializable {
         return true;
     }
 
+
+    public boolean adicionarNo(String noID, int c) {
+        if (existe(noID)) return false;
+        Imagens imagens = Imagens.escolherImagem(c);
+        switch (imagens) {
+            case RACK:
+                Endpoint rack = new Endpoint(noID);
+                rack.setImagens(c);
+                this.nos.add(rack);
+            case CAMERA:
+                Endpoint camera = new Endpoint(noID);
+                camera.setImagens(c);
+                this.nos.add(camera);
+            case SERVER:
+                Endpoint server = new Endpoint(noID);
+                server.setImagens(c);
+                this.nos.add(server);
+            case SWITCH:
+                Switch comutador = new Switch(noID);
+                comutador.setImagens(c);
+                this.nos.add(comutador);
+            case DESKTOP:
+                Endpoint desktop = new Endpoint(noID);
+                desktop.setImagens(c);
+                this.nos.add(desktop);
+            case FIREWALL:
+                Firewall firewall = new Firewall(noID);
+                firewall.setImagens(c);
+                this.nos.add(firewall);
+            case INTERNET:
+                Internet internet = new Internet(noID);
+                internet.setImagens(c);
+                this.nos.add(internet);
+            case ROTEADORazul:
+                Roteador azul = new Roteador(noID);
+                azul.setImagens(c);
+                this.nos.add(azul);
+            case ROTEADORverde:
+                Roteador verde = new Roteador(noID);
+                verde.setImagens(c);
+                this.nos.add(verde);
+            default:
+                No no = new No(noID);
+                this.nos.add(no);
+        }
+        return true;
+    }
+
+
+
     public boolean adicionarNo(String noID, String subgraph) {
         if(existeSubgraph(subgraph)) {
             for (Graph graph : subgraphs) {
                 if(graph.getLabel().equals(subgraph)) return graph.adicionarNo(noID);
+            }
+        }
+        return false;
+    }
+
+    public boolean adicionarNo(String noID, int c, String subgraph) {
+        if(existeSubgraph(subgraph)) {
+            for (Graph graph : subgraphs) {
+                if(graph.getLabel().equals(subgraph)) return graph.adicionarNo(noID, c);
             }
         }
         return false;
@@ -236,12 +213,25 @@ public class Graph implements Serializable {
         return false;
     }
 
-    public boolean propriedadesNo(String noID, int fsize, int c) {
+    public boolean propriedadesNo(String noID, String label, int fsize, int c) {
         if(this.existe(noID)) {
             for (No n : this.nos) {
                 if(n.getNomeNo().equals(noID)) {
+                    n.setlabel(label);
                     n.setLabelFsizenode(fsize);
                     n.setLabellocNode(c);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean ImagemDoNo(String noID, int c){
+        if(this.existe(noID)){
+            for (No no : this.nos) {
+                if(no.getNomeNo().equals(noID)) {
+                    no.setImagens(c);
                     return true;
                 }
             }

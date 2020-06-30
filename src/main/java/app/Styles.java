@@ -1,15 +1,15 @@
 package app;
 
 public enum Styles {
-    SOLID(0),BOLD(1),FILLED(3),DOTTED(4);
+    SOLID("solid"),BOLD("bold"),FILLED("filled"),DOTTED("dotted");
 
-    private final int codigo;
+    private final String codigo;
 
-    Styles(int c){
+    Styles(String c){
         this.codigo = c;
     }
 
-    public static Styles escolherEstilo(int c){
+    public static Styles escolherEstilo(String c){
         for (Styles style : Styles.values()) {
             if (c == style.codigo) {
                 return style;
