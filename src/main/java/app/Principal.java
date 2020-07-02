@@ -62,16 +62,80 @@ public class Principal {
                     if (app.escolherCorArco(cor3)) System.out.println("Cor dos arcos adicionado com sucesso.");
                     else System.out.println("Houve um erro ao adicionar a cor dos arcos.");
                 case 10:
-//                    System.out.print("Digite o ID do nodo a ser criado: ");
-//                    if(app.adicionarNodeDatagrama()) System.out.println("Nodo adicionado ao grafo com sucesso.");
-//                    else System.out.println("Houve um erro ao adicionar o nodo ao grafo.");grafo
+                    System.out.print("Digite o ID do nodo a ser criado: ");
+                    String id1 = teclado.nextLine();
+                    System.out.print("Digite o codigo do objeto do datagram: ");
+                    int cod1 = Integer.parseInt(teclado.nextLine());
+                    if(app.adicionarNodeDatagrama(id1, cod1)) System.out.println("Nodo adicionado ao grafo com sucesso.");
+                    else System.out.println("Houve um erro ao adicionar o nodo ao grafo.");
                 case 11:
-//                    System.out.print("Digite o ID do nodo a ser criado para o subgrafo: ");
-//                    if (app.adicionarNodeSubGraphDatagrama()) System.out.println("Nodo adicionado ao grafo com sucesso.");
-//                    else System.out.println("Houve um erro ao adicionar o nodo ao grafo.");
+                    System.out.print("Digite o ID do nodo a ser criado para o subgrafo: ");
+                    String id2 = teclado.nextLine();
+                    System.out.print("Digite o codigo do objeto do datagram: ");
+                    int cod2 = Integer.parseInt(teclado.nextLine());
+                    System.out.print("Digite o nome do SubGrafo a ser acessado: ");
+                    String sub1 = teclado.nextLine();
+                    if (app.adicionarNodeSubGraphDatagrama(id2, cod2, sub1)) System.out.println("Nodo adicionado ao grafo com sucesso.");
+                    else System.out.println("Houve um erro ao adicionar o nodo ao grafo.");
                 case 12:
-                    System.out.print("");
+                    System.out.print("Digite o nome do SubGrafo a ser criado: ");
+                    String sub2 = teclado.nextLine();
+                    if (app.criarSubGraph(sub2)) System.out.println("SubGrafo Criado com sucesso.");
+                    else System.out.println("Houve um erro ao criar o subgrafo.");
                 case 13:
+                    System.out.print("Digite o nome do nodo do Grafo principal a ser removido: ");
+                    String node = teclado.nextLine();
+                    if(app.removeNode(node)) System.out.println("Nodo removido com sucesso.");
+                    else System.out.println("Houve um erro ao remover o nodo.");
+                case 14:
+                    System.out.print("Digite o nome do SubGrafo a ser deletado: ");
+                    String sub3 = teclado.nextLine();
+                    if(app.removeSubGraph(sub3)) System.out.println("SubGrafo removido com sucesso.");
+                    else System.out.println("Houve um erro ao remover o SubGrafo.");
+                case 15:
+                    System.out.println("Digite o ID do nodo a ser alterado: ");
+                    String id3 = teclado.nextLine();
+                    System.out.print("Digite o novo ID para o nodo: ");
+                    String newID = teclado.nextLine();
+                    if(app.atualizarNode(id3,newID)) System.out.println("Alteração do nodo com sucesso.");
+                    else System.out.println("Houve um erro ao alterar o nodo.");
+                case 16:
+                    System.out.print("Digite o ID do nodo que deseja adicionar propriedades: ");
+                    String id4 = teclado.nextLine();
+                    System.out.print("Digite qual sera o título do nodo: ");
+                    String label2 = teclado.nextLine();
+                    System.out.print("Digite o tamanho da fonte do título: ");
+                    int fs3 = Integer.parseInt(teclado.nextLine());
+                    System.out.print("Digite a posição do título no nodo: ");
+                    String pos3 = teclado.nextLine();
+                    if(app.adicionarPropriedadesNode(id4,label2,fs3,pos3)) System.out.println("Propriedades do nodo adicionadas com sucesso.");
+                    else System.out.println("Houve um erro ao adicionar as propriedades.");
+                case 17:
+                    System.out.print("Digite o ID do nodo \"pai\" a ser associado: ");
+                    String pai1 = teclado.nextLine();
+                    System.out.print("Digite o ID do nodo \"filho\" a ser associdao: ");
+                    String filha1 = teclado.nextLine();
+                    if(app.associarNodes(pai1,filha1)) System.out.println("Associação ocorreu com sucesso.");
+                    else System.out.println("Houve um erro durante a associação.");
+                case 18:
+                    System.out.print("Digite o nome do SubGrafo a ser usado na associação: ");
+                    String subs = teclado.nextLine();
+                    System.out.print("Digite o ID do nodo \"pai\" a ser associado: ");
+                    String pai2 = teclado.nextLine();
+                    System.out.print("Digite o ID do nodo \"filho\" a ser associdao: ");
+                    String filha2 = teclado.nextLine();
+                    if(app.associarNodesSubGraph(pai2,filha2,subs)) System.out.println("Associação ocorreu com sucesso.");
+                    else System.out.println("Houve um erro durante a associação.");
+                case 19:
+                    System.out.print("Digite o nome do SubGrafo a ser usado na associação com o nodo do Grafo: ");
+                    String subs2 = teclado.nextLine();
+                    System.out.print("Digite o ID do nodo \"pai\" do Grafo a ser associado: ");
+                    String pai3 = teclado.nextLine();
+                    System.out.print("Digite o ID do nodo \"filho\" do SubGrafo a ser associdao: ");
+                    String filha4 = teclado.nextLine();
+                    if(app.associarSubGraph(pai3,filha4,subs2)) System.out.println("Associação ocorreu com sucesso.");
+                    else System.out.println("Houve um erro durante a associação.");
+                case 20:
                 default:
             }
         }
@@ -79,13 +143,20 @@ public class Principal {
     
     public static void main(String[] args) {
         Graph graph = new Graph("teste");
+        graph.propriedadesGraph("t",14);
+        graph.propriedadesGeraisNode("oval", "blue","c",10);
+        graph.setEdgeColor("red");
         graph.adicionarNo("a");
         graph.adicionarNo("b");
 
         graph.associacar("a","b");
-        graph.criaSubgraph("cluster_oi");
-        graph.adicionarNo("c", "cluster_oi");
-        graph.associarSubgraph("b","c","cluster_oi");
+        graph.propriedadesNo("a","rede",10,"c");
+        graph.propriedadesNo("b", "internet", 10, "c");
+        graph.criaSubgraph("oi");
+        graph.propriedadesSubGraph("oi","b", 12, "dotted", "green");
+        graph.adicionarNo("c", "oi");
+        graph.propriedadesNoSubGraph("oi","c","cloud",10,"c");
+        graph.associarSubgraph("b","c","oi");
 
         Arquivo arquivo = new Arquivo();
 

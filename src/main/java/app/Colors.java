@@ -10,10 +10,10 @@ public enum Colors {
         this.codigo = c;
     }
 
-    public static Colors escolherCor(String c) {
+    public static String escolherCor(String c) {
         for (Colors cor : Colors.values()) {
             if (c == cor.codigo) {
-                return cor;
+                return cor.codigo;
             }
         }
         throw new IllegalArgumentException();

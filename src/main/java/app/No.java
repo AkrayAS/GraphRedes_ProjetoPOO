@@ -70,17 +70,8 @@ public class No {
         return labellocNode;
     }
 
-    public void setLabellocNode(int c) {
-        Locations labelloc = Locations.escolherLocalizacao(c);
-
-        switch (labelloc) {
-            case TOP:
-                this.labellocNode = "t";
-            case BOTTOM:
-                this.labellocNode = "b";
-            case CENTER:
-                this.labellocNode = "c";
-        }
+    public void setLabellocNode(String c) {
+        this.labellocNode = Locations.escolherLocalizacao(c);
     }
 
     public String getNomeNo() {

@@ -32,7 +32,7 @@ public class Arquivo implements ArquivoDisco, ArquivoDot {
     @Override
     public boolean SalvarGrafoDot(String nomeDoArquivo, Graph graph) {
         File arquivo = new File(nomeDoArquivo);
-        try (FileWriter fwArquivo = new FileWriter(arquivo, arquivo.exists());
+        try (FileWriter fwArquivo = new FileWriter(arquivo);
              BufferedWriter bwArquivo = new BufferedWriter(fwArquivo);
         ) {
             bwArquivo.write(graph.toString() + "\n");

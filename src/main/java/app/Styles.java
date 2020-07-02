@@ -9,10 +9,10 @@ public enum Styles {
         this.codigo = c;
     }
 
-    public static Styles escolherEstilo(String c){
+    public static String escolherEstilo(String c){
         for (Styles style : Styles.values()) {
             if (c == style.codigo) {
-                return style;
+                return style.codigo;
             }
         }
         throw new IllegalArgumentException();

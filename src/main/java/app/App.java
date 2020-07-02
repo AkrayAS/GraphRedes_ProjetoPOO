@@ -158,10 +158,18 @@ public class App {
         }
     }
 
-    public boolean adicionarPropriedadesNode(String noID, String label ,int fsize, int c){
+    public boolean adicionarPropriedadesNode(String noID, String label ,int fsize, String c){
         try {
             return graph.propriedadesNo(noID, label ,fsize, c);
         } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean adicionarPropriedadesNodeSubGraph(String SubGraph, String noID, String label ,int fsize, String c){
+        try {
+            return graph.propriedadesNoSubGraph(SubGraph, noID, label, fsize, c);
+        }catch (Exception e) {
             return false;
         }
     }

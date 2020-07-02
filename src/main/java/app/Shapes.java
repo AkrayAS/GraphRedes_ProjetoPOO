@@ -9,10 +9,10 @@ public enum Shapes {
         this.codigo = c;
     }
 
-    public static Shapes escolherForma(String c){
+    public static String escolherForma(String c){
         for (Shapes shape : Shapes.values()) {
             if (c == shape.codigo) {
-                return shape;
+                return shape.codigo;
             }
         }
         throw new IllegalArgumentException();

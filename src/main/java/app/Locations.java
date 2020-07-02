@@ -9,10 +9,10 @@ public enum Locations {
         this.codigo = c;
     }
 
-    public static Locations escolherLocalizacao(String c){
+    public static String escolherLocalizacao(String c){
         for (Locations locations : Locations.values()) {
             if (c == locations.codigo) {
-                return locations;
+                return locations.codigo;
             }
         }
         throw new IllegalArgumentException();

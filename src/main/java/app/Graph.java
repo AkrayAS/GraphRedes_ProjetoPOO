@@ -32,13 +32,43 @@ public class Graph implements Serializable {
         this.labelloc = labelloc;
     }
 
+    public void propriedadesGraph(String labelloc,int labelFsize) {
+        this.labelloc = labelloc;
+        this.labelFsize = labelFsize;
+    }
+
+    public void propriedadesGraph(String labelloc, int labelFsize, String style, String color) {
+        this.labelloc = labelloc;
+        this.labelFsize = labelFsize;
+        this.style = style;
+        this.color = color;
+    }
+
+    public boolean propriedadesSubGraph(String subGraph, String labelloc, int labelFsize, String style, String color) {
+        if(existeSubgraph(subGraph)) {
+            for(Graph graph: this.subgraphs) {
+                if (graph.getLabel().equals(subGraph)) {
+                    graph.propriedadesGraph(labelloc, labelFsize, style, color);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void propriedadesGeraisNode(String shape,String color, String labelloc, int labelFsizeNode ) {
+        this.nodeShape = shape;
+        this.nodeColor = color;
+        this.labellocNode = labelloc;
+        this.labelFsizeNode = labelFsizeNode;
+    }
+
     public void setLabel(String label){
         this.label = label;
     }
 
     public void setLabelloc(String c) {
-        Locations labelloc = Locations.escolherLocalizacao(c);
-        this.labelloc = labelloc.toString();
+        this.labelloc = Locations.escolherLocalizacao(c);
     }
 
     public void setLabelFsize(int labelFsize) {
@@ -48,23 +78,19 @@ public class Graph implements Serializable {
     }
 
     public void setStyle(String c) {
-        Styles s = Styles.escolherEstilo(c);
-        this.style = s.toString();
+        this.style = Styles.escolherEstilo(c);
     }
 
     public void setColor(String c) {
-        Colors cor = Colors.escolherCor(c);
-        this.color = cor.toString();
+        this.color = Colors.escolherCor(c);
     }
 
     public void setNodeShape(String c) {
-        Shapes s = Shapes.escolherForma(c);
-        this.nodeShape = s.toString();
+        this.nodeShape = Shapes.escolherForma(c);
     }
 
     public void setLabellocNode(String c) {
-        Locations labelloc = Locations.escolherLocalizacao(c);
-        this.labellocNode = labelloc.toString();
+        this.labellocNode = Locations.escolherLocalizacao(c);
     }
 
     public void setLabelFsizeNode(int labelFsizeNode) {
@@ -74,13 +100,11 @@ public class Graph implements Serializable {
     }
 
     public void setNodeColor(String c) {
-        Colors cor = Colors.escolherCor(c);
-        this.nodeColor = cor.toString();
+        this.nodeColor = Colors.escolherCor(c);
     }
 
     public void setEdgeColor(String c) {
-        Colors cor = Colors.escolherCor(c);
-        this.edgeColor = cor.toString();
+        this.edgeColor = Colors.escolherCor(c);
 
     }
 
@@ -213,7 +237,7 @@ public class Graph implements Serializable {
         return false;
     }
 
-    public boolean propriedadesNo(String noID, String label, int fsize, int c) {
+    public boolean propriedadesNo(String noID, String label, int fsize, String c) {
         if(this.existe(noID)) {
             for (No n : this.nos) {
                 if(n.getNomeNo().equals(noID)) {
@@ -226,6 +250,18 @@ public class Graph implements Serializable {
         }
         return false;
     }
+
+    public boolean propriedadesNoSubGraph(String SubGraph, String noID, String label, int fsize, String c) {
+        if(existeSubgraph(SubGraph)) {
+            for (Graph graph: this.subgraphs) {
+                if(graph.getLabel().equals(SubGraph)){
+                    return graph.propriedadesNo(noID, label, fsize, c);
+                }
+            }
+        }
+        return false;
+    }
+
 
     public boolean ImagemDoNo(String noID, int c){
         if(this.existe(noID)){
