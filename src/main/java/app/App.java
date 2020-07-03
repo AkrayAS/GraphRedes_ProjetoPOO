@@ -1,11 +1,21 @@
 package app;
 
-import jdk.jfr.events.ExceptionThrownEvent;
+/**
+ * Classe Onde os metodos para a iteração do usuario estao encapsulados.
+ *
+ * @author Arthur Anastopulos dos Santos
+ */
 
 public class App {
     Graph graph = new Graph();
     Arquivo arquivo = new Arquivo();
 
+    /**
+     *Função que Inicia um Grafo junto ao Programa
+     *
+     * @param label Titulo do Grafo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean iniciarPrograma(String label) {
         try {
             graph.setLabel(label);
@@ -15,6 +25,12 @@ public class App {
         }
     }
 
+    /**
+     * Escolhe a cor dos Arcos do Grafo.
+     *
+     * @param c codigo da Enum das Cores
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean escolherCorArco(String c){
         try {
             graph.setEdgeColor(c);
@@ -32,6 +48,13 @@ public class App {
         }
     }
 
+    /**
+     * Adiciona um nodo com herança do seu tipo de Rede, apartir de seu codigo.
+     *
+     * @param noID ID do nodo
+     * @param c codigo do Datagrama de Rede
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean adicionarNodeDatagrama(String noID, int c) {
         try {
             return graph.adicionarNo(noID, c);
@@ -48,6 +71,14 @@ public class App {
         }
     }
 
+    /**
+     * Adiciona um nodo com herança do seu tipo de Rede, apartir de seu codigo e subgrafo que pertence.
+     *
+     * @param noID ID do nodo
+     * @param c codigo do Datagrama de Rede
+     * @param nameSubGraph nome do Subgrafo
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean adicionarNodeSubGraphDatagrama(String noID, int c, String nameSubGraph){
         try {
             return graph.adicionarNo(noID, c ,nameSubGraph);
@@ -56,6 +87,11 @@ public class App {
         }
     }
 
+    /**
+     * Cria um SubGrafo.
+     * @param label titulo do subgrafo
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean criarSubGraph(String label) {
         try {
             return graph.criaSubgraph(label);
@@ -64,6 +100,12 @@ public class App {
         }
     }
 
+    /**
+     * Remove um nodo apartir de seu id.
+     *
+     * @param noID Id de um nodo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean removeNode(String noID){
         try {
             return graph.removeNo(noID);
@@ -72,6 +114,12 @@ public class App {
         }
     }
 
+    /**
+     * Deleta um subgrafo.
+     *
+     * @param label titulo de um Subgrafo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean removeSubGraph(String label) {
         try {
             return graph.removeSubgraph(label);
@@ -80,6 +128,13 @@ public class App {
         }
     }
 
+    /**
+     * Atualiza o id de um nodo por outro novo Id.
+     *
+     * @param noID id original.
+     * @param novoID novo id.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean atualizarNode(String noID, String novoID){
         try {
             return graph.atualizaNo(noID, novoID);
@@ -88,6 +143,15 @@ public class App {
         }
     }
 
+    /**
+     * Adiciona Propriedades gerais de todos os nodos do Grafo.
+     *
+     * @param shape forma do nodo.
+     * @param color cor do nodo.
+     * @param labelloc posiçao da titulo do nodo.
+     * @param labelFsizeNode tamanho da fonte do nodo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public  boolean adicionarPropriedadesGeralNode(String shape,String color, String labelloc, int labelFsizeNode){
         try {
             graph.propriedadesGeraisNode(shape, color, labelloc, labelFsizeNode);
@@ -97,6 +161,13 @@ public class App {
         }
     }
 
+    /**
+     * Propriedades de um Grafo.
+     *
+     * @param labelloc posiçao do titulo do grafo.
+     * @param labelFsize tamanho da fonte.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean adicinarPropriedadesGraph(String labelloc,int labelFsize) {
         try {
             graph.propriedadesGraph(labelloc, labelFsize);
@@ -114,6 +185,15 @@ public class App {
         }
     }
 
+    /**
+     * Adiciona propriedades a um nodo especifico.
+     *
+     * @param noID id do nodo a ser escolhido.
+     * @param label titulo do nodo.
+     * @param fsize tamanho da fonte do titulo.
+     * @param c posiçao do titulo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean adicionarPropriedadesNode(String noID, String label ,int fsize, String c){
         try {
             return graph.propriedadesNo(noID, label ,fsize, c);
@@ -122,6 +202,16 @@ public class App {
         }
     }
 
+    /**
+     *Adiciona propriedades a um nodo especifico de um Subgrafo.
+     *
+     * @param SubGraph nome do Subgrafo a ser escolhido.
+     * @param noID id do nodo a ser escolhido
+     * @param label titulo do nodo.
+     * @param fsize tamanho da fonte do titulo.
+     * @param c posiçao do titulo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean adicionarPropriedadesNodeSubGraph(String SubGraph, String noID, String label ,int fsize, String c){
         try {
             return graph.propriedadesNoSubGraph(SubGraph, noID, label, fsize, c);
@@ -130,6 +220,13 @@ public class App {
         }
     }
 
+    /**
+     * Assoscia nodos entre si.
+     *
+     * @param paiNoID nodo principal
+     * @param filhaNoID nodo a ser associado ao principal
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean associarNodes(String paiNoID, String filhaNoID) {
         try {
             return graph.associacar(paiNoID, filhaNoID);
@@ -138,6 +235,14 @@ public class App {
         }
     }
 
+    /**
+     * Associa nodos entre si dentro de um subgrafo.
+     *
+     * @param paiNoID nodo principal.
+     * @param filhaNoID nodo a ser associado ao principal.
+     * @param label titulo do subgrafo a ser escolhido.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean associarNodesSubGraph(String paiNoID, String filhaNoID, String label) {
         try {
             return graph.associacar(paiNoID, filhaNoID, label);
@@ -146,6 +251,14 @@ public class App {
         }
     }
 
+    /**
+     * Associar Subgrafo com o grafo.
+     *
+     * @param paiNoID nodo do grafo que associa com o nodo do subgrafo.
+     * @param filhaNoID nodo do subgrafo que associa com o nodo do grafo.
+     * @param label titulo do subgrafo que sera usado.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean associarSubGraph(String paiNoID, String filhaNoID, String label) {
         try {
             return graph.associarSubgraph(paiNoID, filhaNoID, label);
@@ -154,6 +267,12 @@ public class App {
         }
     }
 
+    /**
+     * Salva um arquivo no formato .dot
+     *
+     * @param nomeDoArquivo nome do arquivo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean salvarArquivo(String nomeDoArquivo) {
         try {
             for (No no: graph.getNos()) {
@@ -228,6 +347,12 @@ public class App {
         }
     }
 
+    /**
+     * Grava a classe Grafo em disco para que possa ser utulizada novamente.
+     *
+     * @param nomeDoArquivo nome do arquivo.
+     * @return boolean dependendo se houve sucesso.
+     */
     public boolean salvarArquivoEmDisco(String nomeDoArquivo) {
         try {
             for (No no: graph.getNos()) {
