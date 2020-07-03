@@ -34,12 +34,14 @@ public class Graph implements Serializable {
 
     public void propriedadesGraph(String labelloc,int labelFsize) {
         this.labelloc = labelloc;
-        this.labelFsize = labelFsize;
+        if(labelFsize <= 14 )this.labelFsize = labelFsize;
+        else this.labelFsize = 10;
     }
 
     public void propriedadesGraph(String labelloc, int labelFsize, String style, String color) {
         this.labelloc = labelloc;
-        this.labelFsize = labelFsize;
+        if(labelFsize <= 14) this.labelFsize = labelFsize;
+        else this.labelFsize = 10;
         this.style = style;
         this.color = color;
     }
@@ -60,52 +62,16 @@ public class Graph implements Serializable {
         this.nodeShape = shape;
         this.nodeColor = color;
         this.labellocNode = labelloc;
-        this.labelFsizeNode = labelFsizeNode;
+        if(labelFsizeNode <= 14) this.labelFsizeNode = labelFsizeNode;
+        else this.labelFsizeNode = 10;
     }
 
     public void setLabel(String label){
         this.label = label;
     }
 
-    public void setLabelloc(String c) {
-        this.labelloc = Locations.escolherLocalizacao(c);
-    }
-
-    public void setLabelFsize(int labelFsize) {
-        if(labelFsize <= 14){
-            this.labelFsize = labelFsize;
-        } else this.labelFsize = 10;
-    }
-
-    public void setStyle(String c) {
-        this.style = Styles.escolherEstilo(c);
-    }
-
-    public void setColor(String c) {
-        this.color = Colors.escolherCor(c);
-    }
-
-    public void setNodeShape(String c) {
-        this.nodeShape = Shapes.escolherForma(c);
-    }
-
-    public void setLabellocNode(String c) {
-        this.labellocNode = Locations.escolherLocalizacao(c);
-    }
-
-    public void setLabelFsizeNode(int labelFsizeNode) {
-        if(labelFsizeNode <= 14) {
-            this.labelFsizeNode = labelFsizeNode;
-        } else this.labelFsizeNode = 10;
-    }
-
-    public void setNodeColor(String c) {
-        this.nodeColor = Colors.escolherCor(c);
-    }
-
     public void setEdgeColor(String c) {
         this.edgeColor = Colors.escolherCor(c);
-
     }
 
     public boolean adicionarNo(String noID) {
@@ -124,38 +90,47 @@ public class Graph implements Serializable {
                 Endpoint rack = new Endpoint(noID);
                 rack.setImagens(c);
                 this.nos.add(rack);
+                return true;
             case CAMERA:
                 Endpoint camera = new Endpoint(noID);
                 camera.setImagens(c);
                 this.nos.add(camera);
+                return true;
             case SERVER:
                 Endpoint server = new Endpoint(noID);
                 server.setImagens(c);
                 this.nos.add(server);
+                return true;
             case SWITCH:
                 Switch comutador = new Switch(noID);
                 comutador.setImagens(c);
                 this.nos.add(comutador);
+                return true;
             case DESKTOP:
                 Endpoint desktop = new Endpoint(noID);
                 desktop.setImagens(c);
                 this.nos.add(desktop);
+                return true;
             case FIREWALL:
                 Firewall firewall = new Firewall(noID);
                 firewall.setImagens(c);
                 this.nos.add(firewall);
+                return true;
             case INTERNET:
                 Internet internet = new Internet(noID);
                 internet.setImagens(c);
                 this.nos.add(internet);
+                return true;
             case ROTEADORazul:
                 Roteador azul = new Roteador(noID);
                 azul.setImagens(c);
                 this.nos.add(azul);
+                return true;
             case ROTEADORverde:
                 Roteador verde = new Roteador(noID);
                 verde.setImagens(c);
                 this.nos.add(verde);
+                return true;
             default:
                 No no = new No(noID);
                 this.nos.add(no);
@@ -403,10 +378,14 @@ public class Graph implements Serializable {
         if (subgraphs.size() > 0) {
             for (Graph graph : this.subgraphs) {
                 for (No no : graph.nos) {
-                    if (no.getLabel() != null || no.getLabellocNode() != null || no.getLabelFsizenode() != 0 ) {
+                    if (no.getLabel() != null || no.getLabellocNode() != null || no.getLabelFsizenode() != 0 || no.getImagens() != null) {
                         stringBuilder.append("  ").append(no.getNomeNo()).append("  [");
                         if (no.getLabel() != null) {
                             stringBuilder.append("label = ").append("\"").append(no.getLabel()).append("\"");
+                            if(no.getLabellocNode() != null || no.getLabelFsizenode() != 0 || no.getImagens() != null) stringBuilder.append(" ");
+                        }
+                        if(no.getImagens() != null) {
+                            stringBuilder.append("image = ").append("\"").append(no.getImagens()).append("\"");
                             if(no.getLabellocNode() != null || no.getLabelFsizenode() != 0) stringBuilder.append(" ");
                         }
                         if (no.getLabelFsizenode() > 0) {

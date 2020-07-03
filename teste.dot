@@ -1,0 +1,42 @@
+graph {
+  label = "Datagrama de Redes"
+  labelloc = t
+  fontsize = 14
+
+  node [shape=none color=black fontsize = 10 labelloc = c]
+  edge [color=red]
+
+  internet  [label = "Cloud" image = "img/cloud.png" fontsize = 10 labelloc = "c"]
+  roteador  [label = "Roteador" image = "img/blue-router.png" fontsize = 10 labelloc = "c"]
+  firewall  [label = "Firewall" image = "img/firewall.png" fontsize = 10 labelloc = "c"]
+  desktop1  [label = "Desktop" image = "img/desktop.png" fontsize = 10 labelloc = "c"]
+  desktop2  [label = "Desktop" image = "img/desktop.png" fontsize = 10 labelloc = "c"]
+  server  [label = "Servidor" image = "img/network-server-generic.png" fontsize = 10 labelloc = "c"]
+
+  internet -- roteador
+  roteador -- firewall
+  firewall -- desktop1
+  firewall -- desktop2
+  firewall -- server
+
+  subgraph cluster_desktop{
+    label = "desktop"
+    labelloc = c
+    fontsize = 12
+    style = dotted;
+    bgcolor = yellow;
+
+    desktop1
+    desktop2
+  }
+
+  subgraph cluster_server{
+    label = "server"
+    labelloc = c
+    fontsize = 12
+    style = solid;
+    bgcolor = green;
+
+    server
+  }
+}

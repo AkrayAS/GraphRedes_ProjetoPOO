@@ -11,7 +11,7 @@ public class No {
     //Atributos especificos de cada no
     private int labelFsizenode;
     private String labellocNode;
-    private String imagens;
+    protected String imagens;
 
     public No(String nome) { this.nomeNo = nome; }
 
@@ -24,30 +24,7 @@ public class No {
     }
 
     public void setImagens(int c){
-        Imagens imagens = Imagens.escolherImagem(c);
-
-        switch (imagens) {
-            case RACK:
-                this.imagens = "img/rack-server.png";
-            case CAMERA:
-                this.imagens = "img/ip-camera.png";
-            case SERVER:
-                this.imagens = "img/network-server-generic.png";
-            case SWITCH:
-                this.imagens = "img/switch.png";
-            case DESKTOP:
-                this.imagens = "img/desktop.png";
-            case FIREWALL:
-                this.imagens = "img/firewall.png";
-            case INTERNET:
-                this.imagens = "img/cloud.png";
-            case ROTEADORazul:
-                this.imagens = "img/blue-router.png";
-            case ROTEADORverde:
-                this.imagens = "img/green-router.png";
-            default:
-                this.imagens = null;
-        }
+        this.imagens = null;
     }
 
     public String getImagens() { return  this.imagens; }

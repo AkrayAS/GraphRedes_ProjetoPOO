@@ -1,9 +1,12 @@
 package app;
 
 public class Switch extends No{
-    private String imagem;
-
     public Switch(String nome) { super(nome); }
+
+    @Override
+    public void setImagens(int c) {
+        this.imagens = "img/switch.png";
+    }
 
     @Override
     public boolean verificarAssociacoes() {

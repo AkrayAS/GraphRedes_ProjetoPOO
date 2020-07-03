@@ -1,0 +1,24 @@
+graph {
+  label = "test"
+  labelloc = c
+  fontsize = 14
+
+
+
+  internet -- roteador
+  roteador -- firewall
+  roteador -- camera
+
+  subgraph cluster_desktop{
+    label = "desktop"
+
+    firewall -- desktop
+    desktop
+  }
+
+  subgraph cluster_camera{
+    label = "camera"
+
+    camera
+  }
+}
