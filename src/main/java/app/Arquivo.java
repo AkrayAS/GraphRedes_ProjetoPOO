@@ -18,15 +18,15 @@ public class Arquivo implements ArquivoDisco, ArquivoDot {
     }
 
     @Override
-    public boolean lerGrafoDoDisco(String nomeDoArquivo) {
+    public Graph lerGrafoDoDisco(String nomeDoArquivo) {
         try (FileInputStream fin = new FileInputStream(new File(nomeDoArquivo));
              ObjectInputStream ois = new ObjectInputStream(fin);
         ) {
            Graph nova = (Graph) ois.readObject();
+           return nova;
         } catch (ClassNotFoundException | IOException e) {
-            return false;
+            return null;
         }
-        return true;
     }
 
     @Override

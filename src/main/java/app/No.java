@@ -1,9 +1,10 @@
 package app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class No {
+public class No implements Serializable {
     private String nomeNo;
     private String label;
     protected ArrayList<No> filhas = new ArrayList<>();

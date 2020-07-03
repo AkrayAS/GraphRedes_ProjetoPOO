@@ -18,11 +18,6 @@ public class Endpoint extends No{
     }
 
     @Override
-    public boolean adicionarFilha(No filha) {
-        return false;
-    }
-
-    @Override
     public boolean verificarAssociacoes() {
         return this.associacoes == 1;
     }

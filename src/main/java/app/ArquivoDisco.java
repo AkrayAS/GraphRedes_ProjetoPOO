@@ -6,5 +6,5 @@ public interface ArquivoDisco {
 
     boolean SalvarGrafoEmDisco(String nomeDoArquivo, Graph graph);
 
-    boolean lerGrafoDoDisco(String nomeDoArquivo);
+    Graph lerGrafoDoDisco(String nomeDoArquivo);
 }

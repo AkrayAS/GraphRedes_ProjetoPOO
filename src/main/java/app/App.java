@@ -228,4 +228,77 @@ public class App {
         }
     }
 
+    public boolean salvarArquivoEmDisco(String nomeDoArquivo) {
+        try {
+            for (No no: graph.getNos()) {
+                if(no instanceof Endpoint) {
+                    if (! no.verificarAssociacoes()) {
+                        System.out.println(no.getNomeNo() + " do tipo Endpoint não esta com suas Associações corretas.");
+                        return false;
+                    }
+                }
+                if(no instanceof Firewall){
+                    if(! no.verificarAssociacoes()) {
+                        System.out.println(no.getNomeNo() + " do tipo Firewall não esta com suas Associações corretas.");
+                        return false;
+                    }
+                }
+                if(no instanceof Internet) {
+                    if(! no.verificarAssociacoes()) {
+                        System.out.println(no.getNomeNo() + " do tipo Internet não esta com suas Associações corretas.");
+                        return false;
+                    }
+                }
+                if(no instanceof Roteador) {
+                    if(! no.verificarAssociacoes()) {
+                        System.out.println(no.getNomeNo() + " do tipo Roteador não esta com suas Associações corretas.");
+                        return false;
+                    }
+                }
+                if(no instanceof Switch) {
+                    if(! no.verificarAssociacoes()){
+                        System.out.println(no.getNomeNo() + " do tipo Switch não esta com suas Associações corretas.");
+                        return false;
+                    }
+                }
+            }
+            for (Graph subgraph : graph.getSubgraphs()) {
+                for (No no : subgraph.getNos()) {
+                    if(no instanceof Endpoint) {
+                        if (! no.verificarAssociacoes()) {
+                            System.out.println("No SubGrafo " + subgraph.getLabel()+ " - " + no.getNomeNo() + " do tipo Endpoint não esta com suas Associações corretas.");
+                            return false;
+                        }
+                    }
+                    if(no instanceof Firewall){
+                        if(! no.verificarAssociacoes()) {
+                            System.out.println("No SubGrafo " + subgraph.getLabel()+ " - " + no.getNomeNo() + " do tipo Firewal não esta com suas Associações corretas.");
+                            return false;
+                        }
+                    }
+                    if(no instanceof Internet) {
+                        if(! no.verificarAssociacoes()) {
+                            System.out.println("No SubGrafo " + subgraph.getLabel()+ " - " + no.getNomeNo() + " do tipo Internet não esta com suas Associações corretas.");
+                            return false;
+                        }
+                    }
+                    if(no instanceof Roteador) {
+                        if(! no.verificarAssociacoes()) {
+                            System.out.println("No SubGrafo " + subgraph.getLabel()+ " - " + no.getNomeNo() + " do tipo Roteador não esta com suas Associações corretas.");
+                            return false;
+                        }
+                    }
+                    if(no instanceof Switch) {
+                        if(! no.verificarAssociacoes()) {
+                            System.out.println(no.getNomeNo() + " do tipo Switch não esta com suas Associações corretas.");
+                            return false;
+                        }
+                    }
+                }
+            }
+            return arquivo.SalvarGrafoEmDisco(nomeDoArquivo, graph);
+        }catch (Exception e) {
+            return false;
+        }
+    }
 }
