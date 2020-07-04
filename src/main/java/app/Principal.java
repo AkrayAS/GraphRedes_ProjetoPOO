@@ -28,8 +28,9 @@ public class Principal {
                         "4 - Adicionar Nodo" + "\n" + "5 - Adicionar Nodo ao Subgrafo" + "\n" + "6 - Criar SubGrafo" + "\n" + "7 - Remover Nodo" +
                         "\n" + "8 - Deletar SubGrafo" + "9 - Atualizar ID do Nodo" + "\n" + "10 - Adicionar suas Proprieadades a um Nodo" + "\n" +
                         "11 - Adicionar suas Proprieadades a um Nodo de um SubGrafo" + "\n" + "12 - Associar Nodos" + "\n" + "13 - Associar Nodos dentro do SubGrafo" +
-                        "\n" + "14 - Associar SubGrafo com o Nodo do Grafo" + "\n" + "15 - Salvar Arquivo no estilo .dot" + "\n" +
-                        "16 - Salvar em Disco" + "\n" + "17 - SAIR DO PROGRAMA.");
+                        "\n" + "14 - Associar SubGrafo com o Nodo do Grafo" + "\n" +"15 - Propriedades SubGrafo "
+                        + "\n" + "16 - Salvar Arquivo no estilo .dot" + "\n" + "17 - Salvar em Disco" +
+                        "\n" + "18 - SAIR DO PROGRAMA.");
                 try {
                     System.out.print("Opção: ");
                     int opçao = Integer.parseInt(teclado.nextLine());
@@ -176,18 +177,36 @@ public class Principal {
                             else System.out.println("Houve um erro durante a associação.");
                             break;
                         case 15:
+                            System.out.print("Digite o nome do SubGrafo: ");
+                            String label5 = teclado.nextLine();
+                            listaEstilo();
+                            System.out.print("Digite o estilo dos SubGrafo: ");
+                            String style2 = teclado.nextLine();
+                            listaCores();
+                            System.out.print("Digite a cor dos SubGrafo: ");
+                            String cor2 = teclado.nextLine();
+                            listaPos();
+                            System.out.print("Digite a posição do título dos SubGrafo: ");
+                            String loc3 = teclado.nextLine();
+                            System.out.print("Digite o tamanho geral da fonte para os SubGrafo: ");
+                            int fs5 = Integer.parseInt(teclado.nextLine());
+                            if (app.adicionarPropriedadesSubGraph(label5,loc3,fs5,style2,cor2))
+                                System.out.println("Propriedades adicionadas com sucesso.");
+                            else System.out.println("ouve um erro ao adicionar as propriedades.");
+                            break;
+                        case 16:
                             System.out.print("Digite o nome do arquivo para ser salvo: ");
                             String nomeArq1 = teclado.nextLine();
                             if (app.salvarArquivo(nomeArq1 + ".dot")) System.out.println("Arquivo dot salvo com sucesso.");
                             else System.out.println("Erro ao Salvar.");
                             break;
-                        case 16:
+                        case 17:
                             System.out.print("Digite o nome para a persistencia em disco: ");
                             String nomeArq2 = teclado.nextLine();
                             if (app.salvarArquivoEmDisco(nomeArq2 + ".dat"))
                                 System.out.println("Arquivo gravado em disco com sucesso.");
                             else System.out.println("Erro ao Gravar em Disco.");
-                        case 17:
+                        case 18:
                             System.out.println("Programa Concluindo. Fechando");
                             return;
                     }
