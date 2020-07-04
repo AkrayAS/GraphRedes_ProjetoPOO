@@ -45,10 +45,13 @@ public class Principal {
                             else System.out.println("Houve um erro ao adicionar as propriedades.");
                             break;
                         case 2:
+                            listaFormas();
                             System.out.print("Digite a forma dos nodos: ");
                             String shape = teclado.nextLine();
+                            listaCores();
                             System.out.print("Digite a cor dos Nodos: ");
                             String cor1 = teclado.nextLine();
+                            listaPos();
                             System.out.print("Digite a posição do título dos nodos: ");
                             String loc = teclado.nextLine();
                             System.out.print("Digite o tamanho geral da fonte para os nodos: ");
@@ -58,6 +61,7 @@ public class Principal {
                             else System.out.println("ouve um erro ao adicionar as propriedades.");
                             break;
                         case 3:
+                            listaCores();
                             System.out.print("Digite a cor geral dos arcos: ");
                             String cor3 = teclado.nextLine();
                             if (app.escolherCorArco(cor3)) System.out.println("Cor dos arcos adicionado com sucesso.");
@@ -66,6 +70,7 @@ public class Principal {
                         case 4:
                             System.out.print("Digite o ID do nodo a ser criado: ");
                             String id1 = teclado.nextLine();
+                            listaImagens();
                             System.out.print("Digite o codigo do objeto do datagram: ");
                             int cod1 = Integer.parseInt(teclado.nextLine());
                             if (app.adicionarNodeDatagrama(id1, cod1))
@@ -75,6 +80,7 @@ public class Principal {
                         case 5:
                             System.out.print("Digite o ID do nodo a ser criado para o subgrafo: ");
                             String id2 = teclado.nextLine();
+                            listaImagens();
                             System.out.print("Digite o codigo do objeto do datagrama: ");
                             int cod2 = Integer.parseInt(teclado.nextLine());
                             System.out.print("Digite o nome do SubGrafo a ser acessado: ");
@@ -116,6 +122,7 @@ public class Principal {
                             String label2 = teclado.nextLine();
                             System.out.print("Digite o tamanho da fonte do título: ");
                             int fs3 = Integer.parseInt(teclado.nextLine());
+                            listaPos();
                             System.out.print("Digite a posição do título no nodo: ");
                             String pos3 = teclado.nextLine();
                             if (app.adicionarPropriedadesNode(id4, label2, fs3, pos3))
@@ -131,6 +138,7 @@ public class Principal {
                             String label3 = teclado.nextLine();
                             System.out.print("Digite o tamanho da fonte do título: ");
                             int fs4 = Integer.parseInt(teclado.nextLine());
+                            listaPos();
                             System.out.print("Digite a posição do título no nodo: ");
                             String pos5 = teclado.nextLine();
                             if (app.adicionarPropriedadesNodeSubGraph(subs1, id5, label3, fs4, pos5))
@@ -221,5 +229,26 @@ public class Principal {
 //        Arquivo arquivo = new Arquivo();
 //        arquivo.SalvarGrafoDot("teste.dot", graph);
 //        arquivo.SalvarGrafoEmDisco("img/graph.ser", graph);
+    }
+
+    public static void listaImagens() {
+        System.out.println("Codigo do Datagrama de redes: 0-Roteador Azul  1-Internet  2-Desktop" +
+                "\n" + "3-Firewall  4-Roteador Verde  5-Camera" + "\n" + "6-Server  7-Rack  8-Switch");
+    }
+
+    public static void listaCores() {
+        System.out.println("Cores Disponiveis: black,red,green,yellow,blue,white");
+    }
+
+    public static void listaPos() {
+        System.out.println("Posição disponiveis: Centro - c, Topo - t, Baixo - b");
+    }
+
+    public static void listaFormas() {
+        System.out.println("Formas disponiveis: none,box,oval,triangle");
+    }
+
+    public static void listaEstilo() {
+        System.out.println("Estilo disponiveis: solid, bold, filled, dotted");
     }
 }
